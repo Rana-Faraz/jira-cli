@@ -181,19 +181,43 @@ jira version
 
 The CLI targets Jira Cloud and Atlassian Cloud REST APIs. Credentials can be stored in the OS keyring or overridden per-process with `JIRA_TOKEN`.
 
-Core issue and project commands need at least:
+If you want one scoped Jira API token that covers the entire CLI as currently implemented, create the token in the **Jira** app and enable these scopes:
 
 - `read:jira-user`
 - `read:jira-work`
 - `write:jira-work`
-
-Jira Software commands such as boards, sprints, and epic changes also need:
-
+- `read:project:jira`
 - `read:board-scope:jira-software`
 - `read:sprint:jira-software`
-- `read:epic:jira-software`
 - `write:sprint:jira-software`
+- `read:epic:jira-software`
 - `write:epic:jira-software`
+- `read:issue-details:jira`
+- `read:jql:jira`
+
+These are split across Jira platform and Jira Software APIs:
+
+- Jira platform scopes:
+  - `read:jira-user` for `jira auth login` verification and `jira me`
+  - `read:jira-work` for issue reads, JQL-backed issue listing, project listing, release listing, comments, worklogs, watchers, links, and most read-only platform calls
+  - `write:jira-work` for issue creation, epic creation, issue edits, assignment, transitions, comments, worklogs, watchers, links, remote links, cloning, and deletion
+
+- Jira Software scopes:
+  - `read:project:jira` and `read:board-scope:jira-software` for `jira board list`
+  - `read:sprint:jira-software` for `jira sprint list`
+  - `write:sprint:jira-software` for `jira sprint add` and `jira sprint close`
+  - `read:epic:jira-software` for epic-specific Agile endpoints
+  - `write:epic:jira-software` for `jira epic add` and `jira epic remove`
+  - `read:issue-details:jira` and `read:jql:jira` because Jira Software issue-list endpoints for epics and sprints require them in addition to the Jira Software scopes
+
+If you only care about the exact error you hit, `jira epic add` specifically needs `write:epic:jira-software`.
+
+Notes:
+
+- Atlassian scoped tokens use `https://api.atlassian.com/ex/jira/{cloudId}`. `jira-cli` detects that automatically after login, so you can use either a classic unscoped token or a scoped token.
+- `jira serverinfo` does not need an extra dedicated scope; Atlassian documents that endpoint as usable with any scope.
+- `jira epic create` is implemented as normal issue creation with issue type `Epic`, so it is covered by `write:jira-work`.
+- After minting a new token, run `jira auth login ...` again so the stored keyring token is replaced, or set `JIRA_TOKEN` for the current process.
 
 If a token is missing required scopes, the CLI surfaces the underlying Jira scope mismatch rather than only a generic auth error.
 
