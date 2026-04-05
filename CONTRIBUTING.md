@@ -27,6 +27,12 @@ cargo test
 - Keep documentation in sync with CLI behavior and flags.
 - Run `cargo fmt` and `cargo test` before opening the PR.
 
+## Releases
+
+- Push a tag like `v0.1.2` to trigger the release workflow.
+- The release workflow publishes GitHub Release assets and updates the Homebrew tap formula automatically.
+- Maintainers must set the `HOMEBREW_TAP_TOKEN` repository secret with push access to `Rana-Faraz/homebrew-tap`, or the release workflow will fail at the tap update step.
+
 ## Reporting Issues
 
 When filing bugs, include:

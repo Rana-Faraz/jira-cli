@@ -237,7 +237,7 @@ cargo fmt
 cargo test
 ```
 
-Tagged releases are built by GitHub Actions and published as downloadable release assets.
+Tagged releases are built by GitHub Actions, published as downloadable release assets, and used to update the Homebrew tap formula automatically.
 
 ## Contributing
 
