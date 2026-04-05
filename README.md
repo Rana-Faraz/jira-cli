@@ -14,15 +14,45 @@
 
 ## Installation
 
-### Build from source
+### Homebrew
 
-```powershell
-git clone https://github.com/Rana-Faraz/jira-cli.git
-cd jira-cli
-cargo build --release
+Once the tap is configured, install with:
+
+```bash
+brew tap Rana-Faraz/tap
+brew install jira-cli
 ```
 
-The binary will be available at `target/release/jira`.
+### macOS and Linux
+
+Install the latest GitHub Release into `/usr/local/bin`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rana-Faraz/jira-cli/main/scripts/install.sh | sh
+```
+
+Install into a custom directory:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rana-Faraz/jira-cli/main/scripts/install.sh | sh -s -- --bin-dir "$HOME/.local/bin"
+```
+
+### Windows PowerShell
+
+Install the latest GitHub Release and add it to the user `PATH`:
+
+```powershell
+irm https://raw.githubusercontent.com/Rana-Faraz/jira-cli/main/scripts/install.ps1 | iex
+```
+
+### Manual downloads
+
+Prebuilt binaries are published on [GitHub Releases](https://github.com/Rana-Faraz/jira-cli/releases) for:
+
+- macOS Apple Silicon
+- macOS Intel
+- Linux x86_64
+- Windows x86_64
 
 ## Quick Start
 
@@ -156,6 +186,8 @@ Run the full local verification suite with:
 cargo fmt
 cargo test
 ```
+
+Tagged releases are built by GitHub Actions and published as downloadable release assets.
 
 ## Contributing
 
