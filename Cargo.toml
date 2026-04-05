@@ -1,0 +1,38 @@
+[package]
+name = "jira-cli"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "A Jira Cloud CLI with keyring-backed auth, named contexts, and Markdown-to-ADF workflows."
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/Rana-Faraz/jira-cli"
+homepage = "https://github.com/Rana-Faraz/jira-cli"
+keywords = ["jira", "cli", "atlassian", "productivity"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+anyhow = "1.0.102"
+clap = { version = "4.6.0", features = ["derive"] }
+clap_complete = "4.6.0"
+clap_mangen = "0.2.26"
+dirs = "6.0.0"
+keyring = { version = "3.6.3", default-features = false, features = ["apple-native", "windows-native", "linux-native-sync-persistent", "crypto-rust"] }
+pulldown-cmark = "0.13.3"
+reqwest = { version = "0.13.2", default-features = false, features = ["blocking", "json", "rustls"] }
+rpassword = "7.4.0"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+toml = "0.9.8"
+url = "2.5.8"
+webbrowser = "1.2.0"
+
+[[bin]]
+name = "jira"
+path = "src/main.rs"
+
+[dev-dependencies]
+assert_cmd = "2.0.17"
+httpmock = "0.7.0"
+predicates = "3.1.3"
+tempfile = "3.23.0"
