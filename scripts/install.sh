@@ -14,7 +14,7 @@ Usage: install.sh [options]
 
 Options:
   -b, --bin-dir DIR     Install into DIR (default: /usr/local/bin)
-  -v, --version TAG     Install a specific tag, for example v0.1.0
+  -v, --version TAG     Install a specific tag, for example v0.1.1
   -r, --repo REPO       GitHub repo in owner/name form
       --no-sudo         Never attempt sudo when BIN_DIR is not writable
   -h, --help            Show this help

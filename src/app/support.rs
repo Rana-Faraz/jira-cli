@@ -11,6 +11,19 @@ use crate::{
 
 pub(super) const TOKEN_MANAGEMENT_URL: &str =
     "https://id.atlassian.com/manage-profile/security/api-tokens";
+const SCOPED_TOKEN_SCOPES: &[&str] = &[
+    "read:jira-user",
+    "read:jira-work",
+    "write:jira-work",
+    "read:project:jira",
+    "read:board-scope:jira-software",
+    "read:sprint:jira-software",
+    "write:sprint:jira-software",
+    "read:epic:jira-software",
+    "write:epic:jira-software",
+    "read:issue-details:jira",
+    "read:jql:jira",
+];
 
 pub(super) struct AppContext {
     pub(super) config: Config,
@@ -224,16 +237,18 @@ pub(super) fn print_token_help() {
     println!("  4. Set an expiry date and create the token");
     println!("  5. Copy it immediately; Atlassian will not show it again");
     println!();
-    println!("Recommended minimum scopes for the commands implemented in this CLI today:");
-    println!("  - Core Jira: read:jira-user, read:jira-work, write:jira-work");
-    println!(
-        "  - Jira Software read: read:board-scope:jira-software, read:sprint:jira-software, read:epic:jira-software"
-    );
-    println!("  - Jira Software write: write:sprint:jira-software, write:epic:jira-software");
+    println!("Scoped token permissions for full CLI coverage:");
+    for scope in SCOPED_TOKEN_SCOPES {
+        println!("  - {scope}");
+    }
     println!();
     println!("Notes:");
+    println!("  - `jira epic add` and `jira epic remove` require `write:epic:jira-software`.");
     println!(
-        "  - The scope recommendation above is inferred from the Jira endpoints this CLI currently calls across issues, boards, sprints, and epics."
+        "  - The scope list above is based on the Jira platform and Jira Software endpoints this CLI currently calls."
+    );
+    println!(
+        "  - Scoped tokens use api.atlassian.com under the hood; jira-cli detects that automatically after login."
     );
     println!(
         "  - If your Atlassian account UI does not support scoped tokens for your workflow yet, create a regular API token without scopes and use that instead."
