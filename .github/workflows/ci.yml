@@ -29,5 +29,8 @@ jobs:
       - name: Check formatting
         run: cargo fmt --check
 
+      - name: Validate bundled skills
+        run: python scripts/validate-skills.py
+
       - name: Run tests
         run: cargo test

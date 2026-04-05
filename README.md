@@ -54,6 +54,32 @@ Prebuilt binaries are published on [GitHub Releases](https://github.com/Rana-Far
 - Linux x86_64
 - Windows x86_64
 
+## Claude Code / Codex Skill
+
+Install the bundled `jira` skill so coding agents can use the CLI with repo-specific Jira knowledge.
+
+<details open>
+<summary><b>Via <a href="https://skills.sh">skills.sh</a> (Recommended)</b></summary>
+
+```bash
+npx skills add Rana-Faraz/jira-cli -g -y
+```
+
+</details>
+
+<details>
+<summary><b>Manual install</b></summary>
+
+Copy the skill folder into your agent skill directory:
+
+```bash
+git clone https://github.com/Rana-Faraz/jira-cli.git
+cp -r jira-cli/skills/jira ~/.codex/skills/
+cp -r jira-cli/skills/jira ~/.claude/skills/
+```
+
+</details>
+
 ## Quick Start
 
 Authenticate a Jira Cloud site:

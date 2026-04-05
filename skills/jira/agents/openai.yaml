@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jira CLI"
+  short_description: "Jira Cloud CLI for coding agents"
+  default_prompt: "Use $jira to manage Jira Cloud issues, contexts, and agile workflows from the terminal."
