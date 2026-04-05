@@ -55,11 +55,21 @@ try {
         if ($PathEntries -notcontains $BinDir) {
             $NewPath = ($PathEntries + $BinDir) -join ';'
             [Environment]::SetEnvironmentVariable("Path", $NewPath, "User")
-            Write-Host "Added $BinDir to the user PATH. Open a new terminal to use jira."
+            Write-Host "Added $BinDir to the user PATH."
+        }
+
+        $CurrentPathEntries = @()
+        if ($env:Path) {
+            $CurrentPathEntries = $env:Path.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries)
+        }
+
+        if ($CurrentPathEntries -notcontains $BinDir) {
+            $env:Path = (($CurrentPathEntries + $BinDir) -join ';')
         }
     }
 
     Write-Host "jira-cli $Version installed to $(Join-Path $BinDir 'jira.exe')"
+    Write-Host "jira is available in this PowerShell session now."
 }
 finally {
     if (Test-Path $TempDir) {

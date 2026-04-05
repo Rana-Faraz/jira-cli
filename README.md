@@ -39,7 +39,7 @@ curl -fsSL https://raw.githubusercontent.com/Rana-Faraz/jira-cli/main/scripts/in
 
 ### Windows PowerShell
 
-Install the latest GitHub Release and add it to the user `PATH`:
+Install the latest GitHub Release, add it to the user `PATH`, and make it available in the current PowerShell session:
 
 ```powershell
 irm https://raw.githubusercontent.com/Rana-Faraz/jira-cli/main/scripts/install.ps1 | iex
